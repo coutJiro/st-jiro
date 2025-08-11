@@ -15,6 +15,7 @@ RUN pip install --upgrade pip
 RUN pip install poetry==1.3.1
 
 # Install Python dependencies without dev packages and without interaction
+RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev --no-interaction --no-ansi
 
 # Expose port (make sure it matches your app port)
