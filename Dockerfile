@@ -1,10 +1,9 @@
 FROM python:3.12-slim
 
-# Install system dependencies including distutils, libffi-dev, gcc, etc.
 RUN apt-get update && apt-get install -y \
-    python3-distutils \
     libffi-dev \
     build-essential \
+    python3-distutils \
     gcc \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
