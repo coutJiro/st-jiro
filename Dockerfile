@@ -1,5 +1,5 @@
 # Use official python 3.12 slim image
-FROM python:3.12-slim
+FROM python:3.12
 
 # Install system dependencies for cffi, distutils, and building wheels
 RUN apt-get update && apt-get install -y --no-install-recommends \
