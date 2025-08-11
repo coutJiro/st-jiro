@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-RUN apt-get update && apt-get install -y libffi-dev build-essential
+RUN apt-get update && apt-get install -y libffi-dev build-essential python3-distutils
 
 WORKDIR /app
 
