@@ -1,18 +1,19 @@
 FROM python:3.12-slim
 
+# Install system dependencies needed for building packages & distutils
 RUN apt-get update && apt-get install -y \
+    python3-distutils \
     libffi-dev \
     build-essential \
-    python3-distutils \
     gcc \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY . /app
 
 RUN pip install --upgrade pip
+
 RUN pip install poetry==1.3.1
 
 ENV POETRY_VIRTUALENVS_CREATE=false
