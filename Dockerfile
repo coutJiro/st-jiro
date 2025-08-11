@@ -1,22 +1,24 @@
-FROM python:3.12
+FROM python:3.12-slim
 
-# Install system dependencies, including distutils
-RUN apt-get update && apt-get install -y python3-distutils libffi-dev build-essential
-
-# Set environment variables
-ENV POETRY_VERSION=1.3.1
-ENV POETRY_VIRTUALENVS_CREATE=false
-ENV POETRY_NO_INTERACTION=1
-ENV POETRY_NO_ANSI=1
+# Install system dependencies including distutils, libffi-dev, gcc, etc.
+RUN apt-get update && apt-get install -y \
+    python3-distutils \
+    libffi-dev \
+    build-essential \
+    gcc \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 COPY . /app
 
-RUN pip install --upgrade pip \
-    && pip install "poetry==$POETRY_VERSION"
+RUN pip install --upgrade pip
+RUN pip install poetry==1.3.1
 
-RUN poetry install --no-dev
+ENV POETRY_VIRTUALENVS_CREATE=false
+
+RUN poetry install --no-dev --no-interaction --no-ansi
 
 EXPOSE 8000
 
